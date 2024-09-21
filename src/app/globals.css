@@ -2,26 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+    background-color: rgb(5, 5, 18);
+    color: gray; /* Default text color */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; /* Optional: Set a default font */
   }
-}
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: white; /* Heading text color */
+  }
+  
+  /* Optionally, you can style specific text elements as needed */
+  p {
+    color: gray; /* Paragraph text color */
+  }
+  
+  a {
+    color: lightgray; /* Link text color */
+  }
+  
+  button {
+    color: white; /* Button text color */
+    background-color: darkgray; /* Button background color */
+  }
+
+  .aside-container::-webkit-scrollbar {
+    width: 8px; /* Adjust the width as needed */
+  }
+  
+  .aside-container::-webkit-scrollbar-thumb {
+    background-color: #f1f1f1; /* Adjust the color to match your background */
+    border-radius: 10px; /* Optional: Adjust the border radius for a rounded look */
+  }
+  
+  .aside-container::-webkit-scrollbar-track {
+    background: transparent; /* Adjust the background color of the track */
+  }
