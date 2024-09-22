@@ -14,33 +14,44 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const signin = async (e) => {
-    e.preventDefault(); // Prevent default form submission
-    setLoading(true); // Start loading state
+ const signin = async (e) => {
+  e.preventDefault(); // Prevent default form submission
+  setLoading(true); // Start loading state
 
-    try {
-      const response = await axios.post(`${BASE_URL}/auth/signing`, { email, password });
-      const data = response.data;
-      
-      if (response.status === 200) {
-        localStorage.setItem("jwt", data.jwt);
-        toast.success('Sign in successful! Redirecting...');
-        setTimeout(() => {
-          router.push('/');
-        }, 2000);
-      } else {
-        setError(data.message || 'Sign in failed. Please try again.');
-        toast.error(data.message || 'Sign in failed. Please try again.');
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/auth/signing`,
+      { email, password },
+      {
+        headers: {
+          'Content-Type': 'application/json', // Set content type
+          // Add any other required headers here, e.g., 'Authorization': 'Bearer YOUR_TOKEN'
+        }
       }
-    } catch (error) {
-      const errorMsg = error.response ? error.response.data.message : error.message;
-      setError(errorMsg);
-      toast.error("An Error occur,Try again");
-      console.error('Error:', errorMsg);
-    } finally {
-      setLoading(false); // End loading state
+    );
+
+    const data = response.data;
+
+    if (response.status === 200) {
+      localStorage.setItem("jwt", data.jwt); // Store JWT token
+      toast.success('Sign in successful! Redirecting...');
+      setTimeout(() => {
+        router.push('/'); // Redirect after success
+      }, 2000);
+    } else {
+      setError(data.message || 'Sign in failed. Please try again.');
+      toast.error(data.message || 'Sign in failed. Please try again.');
     }
-  };
+  } catch (error) {
+    const errorMsg = error.response ? error.response.data.message : error.message;
+    setError(errorMsg);
+    toast.error("An error occurred. Please try again."); // Improved error message
+    console.error('Error:', errorMsg);
+  } finally {
+    setLoading(false); // End loading state
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-transparent rounded-2xl">
