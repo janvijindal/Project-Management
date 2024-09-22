@@ -1,1 +1,1 @@
-export const BASE_URL="http://localhost:8082"
+export const BASE_URL="https://project-backend-production-53fc.up.railway.app"
