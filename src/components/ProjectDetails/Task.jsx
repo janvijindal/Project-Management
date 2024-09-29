@@ -37,7 +37,7 @@ const Task = ({ issueData, projectId, token, projectUsers }) => {
   const handleCreateIssue = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:8082/api/issue`,
+        `${BASE_URL}/api/issue`,
         {
           title: newIssue.title,
           description: newIssue.description,
@@ -60,7 +60,7 @@ const Task = ({ issueData, projectId, token, projectUsers }) => {
 
   const handleDeleteIssue = async (issueId) => {
     try {
-      await axios.delete(`http://localhost:8082/api/issue/${issueId}`, {
+      await axios.delete(`${BASE_URL}/api/issue/${issueId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
