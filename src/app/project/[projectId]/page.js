@@ -73,7 +73,7 @@ const Page = () => {
     if (projectId && isLoggedIn) {
       const fetchIssueData = async () => {
         try {
-          const response = await axios.get(`http://localhost:8082/api/issue/project/${projectId}`, {
+          const response = await axios.get(`${BASE_URL}/api/issue/project/${projectId}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
