@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { FaTrash } from "react-icons/fa"; // Import the delete icon
+import { BASE_URL } from "@/config/api";
 
 const IssueDetail = () => {
   const { projectId, issueId } = useParams();
@@ -18,7 +19,7 @@ const IssueDetail = () => {
       const fetchIssue = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:8082/api/issue/${issueId}`,
+            `${BASE_URL}/api/issue/${issueId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -34,7 +35,7 @@ const IssueDetail = () => {
       const fetchComments = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:8082/api/comment/issue/${issueId}`,
+            `${BASE_URL}/api/comment/issue/${issueId}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -58,7 +59,7 @@ const IssueDetail = () => {
     setIsSubmitting(true);
     try {
       const response = await axios.post(
-        `http://localhost:8082/api/comment`,
+        `${BASE_URL}/api/comment`,
         {
           issueId,
           content: newComment,
@@ -82,7 +83,7 @@ const IssueDetail = () => {
     const newStatus = e.target.value;
     try {
       await axios.put(
-        `http://localhost:8082/api/issue/${issueId}/status/${newStatus}`,
+        `${BASE_URL}/api/issue/${issueId}/status/${newStatus}`,
         {},
         {
           headers: {
@@ -102,7 +103,7 @@ const IssueDetail = () => {
   const handleCommentDelete = async (commentId) => {
     try {
       await axios.delete(
-        `http://localhost:8082/api/comment/${commentId}`,
+        `${BASE_URL}/api/comment/${commentId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
